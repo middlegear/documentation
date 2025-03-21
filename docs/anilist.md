@@ -877,3 +877,9 @@ Retrieves episodes for an anime using the Anilist ID and provider.
 ```
 </details>
 
+<p align="center">
+  <strong><a href="../README.md">Previous</a></strong> &emsp;&emsp; | &emsp;&emsp;
+  <strong><a href="./jikan.md">Next</a></strong>
+</p>
+
+
