@@ -25,7 +25,15 @@
 - 📡 **Fetch Streaming Servers**  
 - 🎥 **Get Watch Links** for anime episodes  
 
-🔹 The API supports **caching (Redis & Memory)** and **rate limiting** to enhance performance.
+
+
+All API requests should be made to the following base URL: [https://hakai-api.onrender.com](https://hakai-api.onrender.com)
+
+
+
+> **Note:** The API only supports **GET** requests. Ensure you handle rate limits (**6 requests per second**) to avoid temporary blocks.
+
+
 
 ---
 

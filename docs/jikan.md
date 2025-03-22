@@ -2,7 +2,7 @@
 
 # 📖 Jikan Metadata Provider 
 
-This document provides a comprehensive guide to the Jikan Metadata Provider API, detailing the available routes, their usage, and response schemas. The API is built using Fastify and offers various endpoints to fetch anime-related data from Jikan.
+This document provides a comprehensive guide to the Jikan Metadata Provider API, detailing the available routes, their usage, and response schemas. The API offers various endpoints to fetch anime-related data from Jikan.
 
 ---
 
@@ -58,6 +58,7 @@ This endpoint allows you to search for anime based on a query.
     "hasNextPage": "boolean",
     "total": "number",
     "lastPage": "number",
+    "currentPage": "number",
     "perPage": "number",
     "data": [
       {
@@ -123,7 +124,7 @@ Retrieves detailed information about a specific anime.
 
 ### Example
 ```plaintext
-/api/mal/info/56784
+/api/jikan/info/56784
 ```
 
 <details>
@@ -183,7 +184,7 @@ Retrieves detailed information about a specific anime.
 
 ### Endpoint
 ```plaintext
-GET /api/anilist/top-airing
+GET /api/jikan/top-airing
 ```
 
 ### Description
@@ -197,7 +198,7 @@ Retrieves the top airing anime.
 
 ### Example
 ```plaintext
-/api/anilist/top-airing?page=1&perPage=20
+/api/jikan/top-airing?page=1&perPage=20
 ```
 
 <details>
@@ -211,6 +212,7 @@ Retrieves the top airing anime.
   "hasNextPage": "boolean",
   "total": "number",
   "lastPage": "number",
+  "currentPage": "number",
   "perPage": "number",
   "data": [
     {
@@ -291,6 +293,7 @@ Retrieves the most popular anime.
     "hasNextPage": "boolean",
     "total": "number",
     "lastPage": "number",
+    "currentPage": "number",
     "perPage": "number",
     "data": [
       {
@@ -369,6 +372,7 @@ Retrieves movie anime.
   "status": "number",
   "hasNextPage": "boolean",
   "total": "number",
+  "currentPage": "number",
   "lastPage": "number",
   "perPage": "number",
   "data": [
@@ -448,6 +452,7 @@ Retrieves the upcoming anime.
   "hasNextPage": "boolean",
   "total": "integer",
   "lastPage": "integer",
+  "currentPage": "number",
   "perPage": "integer",
   "data": [
     {
@@ -526,6 +531,7 @@ Retrieves current seasonal anime.
   "hasNextPage": "boolean",
   "total": "integer",
   "lastPage": "integer",
+  "currentPage": "number",
   "perPage": "integer",
   "data": [
     {
@@ -603,6 +609,7 @@ Retrieves next seasonal anime.
   "status": "integer",
   "hasNextPage": "boolean",
   "total": "integer",
+  "currentPage": "number",
   "lastPage": "integer",
   "perPage": "integer",
   "data": [
@@ -731,6 +738,7 @@ Retrieves MAL anime episodes.
   "success": "boolean",
   "status": "integer",
   "hasNextPage": "boolean",
+  "currentPage": "number",
   "lastPage": "integer",
   "data": [
     {
@@ -828,6 +836,7 @@ Retrieves the anime for a specific season and year.
   "hasNextPage": "boolean",
   "total": "integer",
   "lastPage": "integer",
+  "currentPage": "number",
   "perPage": "integer",
   "data": [
     {
@@ -888,7 +897,7 @@ Retrieves anime provider information using the MAL ID.
 ### Path Parameters
 | Parameter | Type   | Description | Required?  | Default |
 |-----------|--------|-------------|-----------|----------| 
-| `malId` | number | The Anilist ID of the anime. | Yes | `''` |
+| `malId` | number | The MAL ID of the anime. | Yes | `''` |
 
 ### Query Parameters
 | Parameter | Type   | Description | Required?  | Default |
@@ -963,7 +972,7 @@ Retrieves anime provider information using the MAL ID.
 
 ### Endpoint
 ```plaintext
-GET /api/jikan/provider-episodes/:anilistId
+GET /api/jikan/provider-episodes/:malId
 ```
 
 ### Description
@@ -972,7 +981,7 @@ Retrieves episodes for an anime using the MAL ID and animeprovider.
 ### Path Parameters
 | Parameter | Type   | Description | Required?  | Default |
 |-----------|--------|-------------|-----------|----------| 
-| `anilistId` | number | The Anilist ID of the anime. | Yes | `''` |
+| `malId` | number | The MAL ID of the anime. | Yes | `''` |
 
 ### Query Parameters
 | Parameter | Type   | Description | Required?  | Default |
