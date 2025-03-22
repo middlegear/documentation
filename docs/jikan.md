@@ -1056,8 +1056,8 @@ Retrieves episodes for an anime using the MAL ID and animeprovider.
 </details>
 
 <p align="center">
-  <strong><a href="./anilist.md">Previous</a></strong> &emsp;&emsp; | &emsp;&emsp;
-  <strong><a href="./hianime.md">Next</a></strong>
+  <strong><a href="./anilist.md">Previous (Anilist docs)</a></strong> &emsp;&emsp; | &emsp;&emsp;
+  <strong><a href="./hianime.md">Next (Hianime docs)</a></strong>
 </p>
 
 

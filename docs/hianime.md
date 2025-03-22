@@ -246,7 +246,7 @@ Retrieves  streaming sources for a specific anime episode..
 
 ### Example
 ```plaintext
-/api/jikan/movies?page=1&perPage=20
+/api/hianime/watch/solo-leveling-18718-episode-119497?category=sub&server=hd-1
 ```
 
 <details>
@@ -295,3 +295,7 @@ Retrieves  streaming sources for a specific anime episode..
 
 ---
 
+<p align="center">
+  <strong><a href="./jikan.md">Previous (Jikan docs)</a></strong> &emsp;&emsp; | &emsp;&emsp;
+  <strong><a href="./animekai.md">Next (Animekai docs)</a></strong>
+</p>
