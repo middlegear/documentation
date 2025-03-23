@@ -1,1 +1,1 @@
-1 .. update the base url 
+1. Look for good server provider without coldstarts 

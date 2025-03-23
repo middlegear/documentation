@@ -31,7 +31,7 @@ All API requests should be made to the following base URL: [https://hakai-api.on
 
 
 
-> **Note:** The API only supports **GET** requests. Ensure you handle rate limits (**6 requests per second**) to avoid temporary blocks.
+> **Note:** The API only supports **GET** requests. Ensure you handle rate limits (**6 requests per second**) to avoid temporary blocks. Server Cold starts  are a nuisance
 
 
 
