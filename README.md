@@ -27,7 +27,7 @@
 
 
 
-All API requests should be made to the following base URL: [https://hakai-api.onrender.com](https://hakai-api.onrender.com)
+All API requests should be made to the following base URL: [https://hakai-api.vercel.app](https://hakai-api.vercel.app)
 
 
 
