@@ -257,6 +257,14 @@ Retrieves  streaming sources for a specific anime episode..
 ```
 </details>
 
+## Handling CORS 403 Forbidden Errors for M3U8 Streams
+ (CORS) `403 Forbidden` errors when trying to access M3U8 (HTTP Live Streaming) playlists and their associated media segments from a web application. This often occurs when the server hosting the M3U8 content is on a different domain than your web application and doesn't have the necessary CORS headers configured.
+
+**The Solution: Using an M3U8 Proxy**
+
+The most common and effective way to overcome this limitation is to use a **proxy server** that sits between your web application and the M3U8 content server. This proxy server fetches the M3U8 playlist and its segments on behalf of your application and adds the necessary CORS headers to its responses, effectively making the content accessible to your browser.
+Pass the referer header to the proxy
+
 ---
 
 <p align="center">
