@@ -1,1 +1,1 @@
-1. Look for good server provider without coldstarts 
+
