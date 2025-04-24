@@ -186,7 +186,7 @@ Retrieves available streaming servers for a specific episode.
 
 ---
 
-## 5. Anime Provider Sources <a id="5-anime-provider-sources"></a>
+## 4. Anime Provider Sources <a id="4-anime-provider-sources"></a>
 
 ### Endpoint
 ```plaintext
