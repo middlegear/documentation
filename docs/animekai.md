@@ -1,4 +1,4 @@
-# 📖 Animekai Provider (Broken)
+# 📖 Animekai Provider.
 
 This document provides a comprehensive guide to the Animekai Provider endpoint, detailing the available routes, their usage, and response schemas. The API offers various endpoints to fetch anime-related data from animekai.
 
