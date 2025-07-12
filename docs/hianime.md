@@ -44,29 +44,25 @@ This endpoint allows you to search for anime based on a query.
 
 ```json
 {
-  "data": {
-    "success": "boolean",
-    "status": "number",
-    "hasNextPage": "boolean",
-    "currentPage": "number",
-    "totalPages": "number",
-    "data": [
-      {
-        "id": "string",
-        "name": "string",
-        "romanji": "string",
-        "posterImage": "string",
-        "url": "string",
-        "duration": "string",
-        "type": "string",
-        "rating": "string",
-        "episodes": {
-          "sub": "number",
-          "dub": "number"
-        }
+  "hasNextPage": "boolean",
+  "currentPage": "number",
+  "totalPages": "number",
+  "data": [
+    {
+      "id": "string",
+      "name": "string",
+      "romanji": "string",
+      "posterImage": "string",
+      "url": "string",
+      "duration": "string",
+      "type": "string",
+      "rating": "string",
+      "episodes": {
+        "sub": "number",
+        "dub": "number"
       }
-    ]
-  }
+    }
+  ]
 }
 ```
 
@@ -104,23 +100,19 @@ Retrieves information about a specific anime..
 ```json
 {
   "data": {
-    "status": "number",
-    "success": "boolean",
-    "data": {
-      "animeId": "string",
-      "title": "string",
-      "anilistId": "number",
-      "malId": "number",
-      "posterImage": "string",
-      "duration": "number",
-      "type": "string",
-      "synopsis": "string",
-      "episodes": {
-        "sub": "number",
-        "dub": "number"
-      },
-      "totalEpisodes": "number"
-    }
+    "animeId": "string",
+    "title": "string",
+    "anilistId": "number",
+    "malId": "number",
+    "posterImage": "string",
+    "duration": "number",
+    "type": "string",
+    "synopsis": "string",
+    "episodes": {
+      "sub": "number",
+      "dub": "number"
+    },
+    "totalEpisodes": "number"
   }
 }
 ```
@@ -158,18 +150,14 @@ Retrieves a list of episodes for a specific anime.
 
 ```json
 {
-  "data": {
-    "status": "number",
-    "success": "boolean",
-    "data": [
-      {
-        "episodeId": "string",
-        "title": "string",
-        "number": "number",
-        "href": "string"
-      }
-    ]
-  }
+  "data": [
+    {
+      "episodeId": "string",
+      "title": "string",
+      "number": "number",
+      "href": "string"
+    }
+  ]
 }
 ```
 
@@ -207,23 +195,19 @@ Retrieves available streaming servers for a specific episode.
 ```json
 {
   "data": {
-    "success": "boolean",
-    "status": "number",
-    "data": {
-      "sub": [
-        {
-          "severId": "number",
-          "serverName": "string"
-        }
-      ],
-      "dub": [
-        {
-          "severId": "number",
-          "serverName": "string"
-        }
-      ],
-      "episodeNumber": "number"
-    }
+    "sub": [
+      {
+        "severId": "number",
+        "serverName": "string"
+      }
+    ],
+    "dub": [
+      {
+        "severId": "number",
+        "serverName": "string"
+      }
+    ],
+    "episodeNumber": "number"
   }
 }
 ```
@@ -268,54 +252,41 @@ Retrieves streaming sources for a specific anime episode..
 
 ```json
 {
+  "headers": {
+    "Referer": "string"
+  },
   "data": {
-    "headers": {
-      "Referer": "string"
+    "intro": {
+      "start": "number",
+      "end": "number"
     },
-    "data": {
-      "intro": {
-        "start": "number",
-        "end": "number"
+    "outro": {
+      "start": "number",
+      "end": "number"
+    },
+    "subtitles": [
+      {
+        "file": "string",
+        "label": "string",
+        "kind": "string",
+        "default": "boolean"
       },
-      "outro": {
-        "start": "number",
-        "end": "number"
-      },
-      "subtitles": [
-        {
-          "file": "string",
-          "label": "string",
-          "kind": "string",
-          "default": "boolean"
-        },
-        {
-          "file": "string",
-          "kind": "string"
-        }
-      ],
-      "sources": [
-        {
-          "url": "string",
-          "type": "string"
-        }
-      ]
-    }
+      {
+        "file": "string",
+        "kind": "string"
+      }
+    ],
+    "sources": [
+      {
+        "url": "string",
+        "type": "string"
+      }
+    ]
   }
 }
 ```
 
 </details>
-
-## Handling CORS 403 Forbidden Errors for M3U8 Streams
-
-(CORS) `403 Forbidden` errors when trying to access M3U8 (HTTP Live Streaming) playlists and their associated media segments from a web application. This often occurs when the server hosting the M3U8 content is on a different domain than your web application and doesn't have the necessary CORS headers configured.
-
-**The Solution: Using an M3U8 Proxy**
-
-The most common and effective way to overcome this limitation is to use a **proxy server** that sits between your web application and the M3U8 content server. This proxy server fetches the M3U8 playlist and its segments on behalf of your application and adds the necessary CORS headers to its responses, effectively making the content accessible to your browser.
-Pass the referer header to the proxy
-
----
 
 <p align="center">
   <strong><a href="./jikan.md">Previous (Jikan docs)</a></strong> &emsp;&emsp; | &emsp;&emsp;

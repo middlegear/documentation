@@ -1,6 +1,4 @@
-
-
-# 📖 Jikan Metadata Provider 
+# 📖 Jikan Metadata Provider
 
 This document provides a comprehensive guide to the Jikan Metadata Provider API, detailing the available routes, their usage, and response schemas. The API offers various endpoints to fetch anime-related data from Jikan.
 
@@ -27,22 +25,26 @@ This document provides a comprehensive guide to the Jikan Metadata Provider API,
 
 ## 1. Search <a id="1-search"></a>
 
-### Endpoint  
+### Endpoint
+
 ```plaintext
 GET /api/jikan/search
 ```
 
 ### Description
+
 This endpoint allows you to search for anime based on a query.
 
 ### Query Parameters
-| Parameter | Type   | Description | Required?  | Default |
-|-----------|--------|-------------|-----------|----------| 
-| `q`       | string | The search query of the anime. | Yes | `''` |
-| `page`    | number | The page number of results to return. | No | `1` |
-| `perPage` | number | The number of items per page. | No | `20` |
+
+| Parameter | Type   | Description                           | Required? | Default |
+| --------- | ------ | ------------------------------------- | --------- | ------- |
+| `q`       | string | The search query of the anime.        | Yes       | `''`    |
+| `page`    | number | The page number of results to return. | No        | `1`     |
+| `perPage` | number | The number of items per page.         | No        | `20`    |
 
 ### Example
+
 ```plaintext
 /api/jikan/search?q=bleach&page=1&perPage=20
 ```
@@ -52,90 +54,13 @@ This endpoint allows you to search for anime based on a query.
 
 ```json
 {
-  "data": {
-    "success": "boolean",
-    "status": "number",
-    "hasNextPage": "boolean",
-    "total": "number",
-    "lastPage": "number",
-    "currentPage": "number",
-    "perPage": "number",
-    "data": [
-      {
-        "malId": "number",
-        "title": {
-          "romaji": "string",
-          "english": "string",
-          "native": "string"
-        },
-        "image": "string",
-        "bannerImage": "string",
-        "trailer": "string",
-        "episodes": "number",
-        "startDate": "string",
-        "endDate": "string",
-        "format": "string",
-        "status": "string",
-        "genres": ["string"],
-        "duration": "string",
-        "score": "number",
-        "synopsis": "string",
-        "season": "string",
-        "studio": [
-          {
-            "mal_id": "number",
-            "type": "string",
-            "name": "string",
-            "url": "string"
-          }
-        ],
-        "producers": [
-          {
-            "mal_id": "number",
-            "type": "string",
-            "name": "string",
-            "url": "string"
-          }
-        ]
-      }
-    ]
-  }
-}
-
-```
-</details>
-
----
-
-## 2. Anime Info <a id="2-anime-info"></a>
-
-### Endpoint
-```plaintext
-GET /api/jikan/info/:malId
-```
-
-### Description
-Retrieves detailed information about a specific anime.
-
-### Path Parameters
-| Parameter | Type   | Description | Required?  | Default |
-|-----------|--------|-------------|-----------|----------| 
-| `malId` | number | The MAL ID of the anime. | Yes | `''` |
-
-### Example
-```plaintext
-/api/jikan/info/56784
-```
-
-<details>
-<summary>📄 Response Schema</summary>
-
-```json
-{
-  "data": {
-    "success": "boolean",
-    "status": "number",
-    "data": {
+  "hasNextPage": "boolean",
+  "total": "number",
+  "lastPage": "number",
+  "currentPage": "number",
+  "perPage": "number",
+  "data": [
+    {
       "malId": "number",
       "title": {
         "romaji": "string",
@@ -172,10 +97,83 @@ Retrieves detailed information about a specific anime.
         }
       ]
     }
+  ]
+}
+```
+
+</details>
+
+---
+
+## 2. Anime Info <a id="2-anime-info"></a>
+
+### Endpoint
+
+```plaintext
+GET /api/jikan/info/:malId
+```
+
+### Description
+
+Retrieves detailed information about a specific anime.
+
+### Path Parameters
+
+| Parameter | Type   | Description              | Required? | Default |
+| --------- | ------ | ------------------------ | --------- | ------- |
+| `malId`   | number | The MAL ID of the anime. | Yes       | `''`    |
+
+### Example
+
+```plaintext
+/api/jikan/info/56784
+```
+
+<details>
+<summary>📄 Response Schema</summary>
+
+```json
+{
+  "data": {
+    "malId": "number",
+    "title": {
+      "romaji": "string",
+      "english": "string",
+      "native": "string"
+    },
+    "image": "string",
+    "bannerImage": "string",
+    "trailer": "string",
+    "episodes": "number",
+    "startDate": "string",
+    "endDate": "string",
+    "format": "string",
+    "status": "string",
+    "genres": ["string"],
+    "duration": "string",
+    "score": "number",
+    "synopsis": "string",
+    "season": "string",
+    "studio": [
+      {
+        "mal_id": "number",
+        "type": "string",
+        "name": "string",
+        "url": "string"
+      }
+    ],
+    "producers": [
+      {
+        "mal_id": "number",
+        "type": "string",
+        "name": "string",
+        "url": "string"
+      }
+    ]
   }
 }
-
 ```
+
 </details>
 
 ---
@@ -183,20 +181,24 @@ Retrieves detailed information about a specific anime.
 ## 3. Top Airing <a id="3-top-airing"></a>
 
 ### Endpoint
+
 ```plaintext
 GET /api/jikan/top-airing
 ```
 
 ### Description
+
 Retrieves the top airing anime.
 
 ### Query Parameters
-| Parameter | Type   | Description | Required?  | Default |
-|-----------|--------|-------------|-----------|----------| 
-| `page`    | number | The page number of results to return. | No | `1` |
-| `perPage` | number | The number of items per page. | No | `20` |
+
+| Parameter | Type   | Description                           | Required? | Default |
+| --------- | ------ | ------------------------------------- | --------- | ------- |
+| `page`    | number | The page number of results to return. | No        | `1`     |
+| `perPage` | number | The number of items per page.         | No        | `20`    |
 
 ### Example
+
 ```plaintext
 /api/jikan/top-airing?page=1&perPage=20
 ```
@@ -205,10 +207,7 @@ Retrieves the top airing anime.
 <summary>📄 Response Schema</summary>
 
 ```json
-
 {
-  "success": "boolean",
-  "status": "number",
   "hasNextPage": "boolean",
   "total": "number",
   "lastPage": "number",
@@ -254,8 +253,8 @@ Retrieves the top airing anime.
     }
   ]
 }
-
 ```
+
 </details>
 
 ---
@@ -263,21 +262,25 @@ Retrieves the top airing anime.
 ## 4. Most Popular <a id="4-most-popular"></a>
 
 ### Endpoint
+
 ```plaintext
 GET /api/jikan/most-popular
 ```
 
 ### Description
+
 Retrieves the most popular anime.
 
 ### Query Parameters
-| Parameter | Type   | Description | Required?  | Default |
-|-----------|--------|-------------|-----------|----------| 
-| `format`  | string | Format of anime (TV, MOVIE, SPECIAL, OVA, ONA, MUSIC). | No | `TV` |
-| `page`    | number | The page number of results to return. | No | `1` |
-| `perPage` | number | The number of items per page. | No | `20` |
+
+| Parameter | Type   | Description                                            | Required? | Default |
+| --------- | ------ | ------------------------------------------------------ | --------- | ------- |
+| `format`  | string | Format of anime (TV, MOVIE, SPECIAL, OVA, ONA, MUSIC). | No        | `TV`    |
+| `page`    | number | The page number of results to return.                  | No        | `1`     |
+| `perPage` | number | The number of items per page.                          | No        | `20`    |
 
 ### Example
+
 ```plaintext
 /api/jikan/most-popular?format=TV&page=1&perPage=20
 ```
@@ -287,57 +290,53 @@ Retrieves the most popular anime.
 
 ```json
 {
-  "data": {
-    "success": "boolean",
-    "status": "number",
-    "hasNextPage": "boolean",
-    "total": "number",
-    "lastPage": "number",
-    "currentPage": "number",
-    "perPage": "number",
-    "data": [
-      {
-        "malId": "number",
-        "title": {
-          "romaji": "string",
-          "english": "string",
-          "native": "string"
-        },
-        "image": "string",
-        "bannerImage": "string",
-        "trailer": "string",
-        "episodes": "number",
-        "startDate": "string (date format)",
-        "endDate": "string (date format)",
-        "format": "string",
-        "status": "string",
-        "genres": ["string"],
-        "duration": "string",
-        "score": "number",
-        "synopsis": "string",
-        "season": "string",
-        "studio": [
-          {
-            "mal_id": "number",
-            "type": "string",
-            "name": "string",
-            "url": "string"
-          }
-        ],
-        "producers": [
-          {
-            "mal_id": "number",
-            "type": "string",
-            "name": "string",
-            "url": "string"
-          }
-        ]
-      }
-    ]
-  }
+  "hasNextPage": "boolean",
+  "total": "number",
+  "lastPage": "number",
+  "currentPage": "number",
+  "perPage": "number",
+  "data": [
+    {
+      "malId": "number",
+      "title": {
+        "romaji": "string",
+        "english": "string",
+        "native": "string"
+      },
+      "image": "string",
+      "bannerImage": "string",
+      "trailer": "string",
+      "episodes": "number",
+      "startDate": "string (date format)",
+      "endDate": "string (date format)",
+      "format": "string",
+      "status": "string",
+      "genres": ["string"],
+      "duration": "string",
+      "score": "number",
+      "synopsis": "string",
+      "season": "string",
+      "studio": [
+        {
+          "mal_id": "number",
+          "type": "string",
+          "name": "string",
+          "url": "string"
+        }
+      ],
+      "producers": [
+        {
+          "mal_id": "number",
+          "type": "string",
+          "name": "string",
+          "url": "string"
+        }
+      ]
+    }
+  ]
 }
-
 ```
+
 </details>
 
 ---
@@ -345,20 +344,24 @@ Retrieves the most popular anime.
 ## 5. Movies <a id="5-movies"></a>
 
 ### Endpoint
+
 ```plaintext
 GET /api/jikan/movies
 ```
 
 ### Description
+
 Retrieves movie anime.
 
 ### Query Parameters
-| Parameter | Type   | Description | Required?  | Default |
-|-----------|--------|-------------|-----------|----------| 
-| `page`    | number | The page number of results to return. | No | `1` |
-| `perPage` | number | The number of items per page. | No | `20` |
+
+| Parameter | Type   | Description                           | Required? | Default |
+| --------- | ------ | ------------------------------------- | --------- | ------- |
+| `page`    | number | The page number of results to return. | No        | `1`     |
+| `perPage` | number | The number of items per page.         | No        | `20`    |
 
 ### Example
+
 ```plaintext
 /api/jikan/movies?page=1&perPage=20
 ```
@@ -368,8 +371,6 @@ Retrieves movie anime.
 
 ```json
 {
-  "success": "boolean",
-  "status": "number",
   "hasNextPage": "boolean",
   "total": "number",
   "currentPage": "number",
@@ -415,8 +416,8 @@ Retrieves movie anime.
     }
   ]
 }
-
 ```
+
 </details>
 
 ---
@@ -424,20 +425,24 @@ Retrieves movie anime.
 ## 6. Upcoming Anime <a id="6-upcoming-anime"></a>
 
 ### Endpoint
+
 ```plaintext
 GET /api/jikan/upcoming
 ```
 
 ### Description
+
 Retrieves the upcoming anime.
 
 ### Query Parameters
-| Parameter | Type   | Description | Required?  | Default |
-|-----------|--------|-------------|-----------|----------| 
-| `page`    | number | The page number of results to return. | No | `1` |
-| `perPage` | number | The number of items per page. | No | `20` |
+
+| Parameter | Type   | Description                           | Required? | Default |
+| --------- | ------ | ------------------------------------- | --------- | ------- |
+| `page`    | number | The page number of results to return. | No        | `1`     |
+| `perPage` | number | The number of items per page.         | No        | `20`    |
 
 ### Example
+
 ```plaintext
 /api/jikan/upcoming?page=1&perPage=20
 ```
@@ -447,8 +452,6 @@ Retrieves the upcoming anime.
 
 ```json
 {
-  "success": "boolean",
-  "status": "integer",
   "hasNextPage": "boolean",
   "total": "integer",
   "lastPage": "integer",
@@ -494,29 +497,34 @@ Retrieves the upcoming anime.
     }
   ]
 }
-
 ```
+
 </details>
 
 ---
+
 ## 7. Current Season <a id="7-current-season"></a>
 
 ### Endpoint
+
 ```plaintext
 GET /api/jikan/current-season
 ```
 
 ### Description
+
 Retrieves current seasonal anime.
 
 ### Query Parameters
-| Parameter | Type   | Description | Required?  | Default |
-|-----------|--------|-------------|-----------|----------| 
-| `format`  | string | Format of anime (TV, MOVIE, SPECIAL, OVA, ONA, MUSIC). | No | `TV` |
-| `page`    | number | The page number of results to return. | No | `1` |
-| `perPage` | number | The number of items per page. | No | `20` |
+
+| Parameter | Type   | Description                                            | Required? | Default |
+| --------- | ------ | ------------------------------------------------------ | --------- | ------- |
+| `format`  | string | Format of anime (TV, MOVIE, SPECIAL, OVA, ONA, MUSIC). | No        | `TV`    |
+| `page`    | number | The page number of results to return.                  | No        | `1`     |
+| `perPage` | number | The number of items per page.                          | No        | `20`    |
 
 ### Example
+
 ```plaintext
 /api/jikan/current-season?format=TV&page=1&perPage=20
 ```
@@ -526,8 +534,6 @@ Retrieves current seasonal anime.
 
 ```json
 {
-  "success": "boolean",
-  "status": "integer",
   "hasNextPage": "boolean",
   "total": "integer",
   "lastPage": "integer",
@@ -573,29 +579,34 @@ Retrieves current seasonal anime.
     }
   ]
 }
-
 ```
+
 </details>
 
 ---
+
 ## 8. Next Season <a id="8-next-season"></a>
 
 ### Endpoint
+
 ```plaintext
 GET /api/jikan/next-season
 ```
 
 ### Description
+
 Retrieves next seasonal anime.
 
 ### Query Parameters
-| Parameter | Type   | Description | Required?  | Default |
-|-----------|--------|-------------|-----------|----------| 
-| `format`  | string | Format of anime (TV, MOVIE, SPECIAL, OVA, ONA, MUSIC). | No | `TV` |
-| `page`    | number | The page number of results to return. | No | `1` |
-| `perPage` | number | The number of items per page. | No | `20` |
+
+| Parameter | Type   | Description                                            | Required? | Default |
+| --------- | ------ | ------------------------------------------------------ | --------- | ------- |
+| `format`  | string | Format of anime (TV, MOVIE, SPECIAL, OVA, ONA, MUSIC). | No        | `TV`    |
+| `page`    | number | The page number of results to return.                  | No        | `1`     |
+| `perPage` | number | The number of items per page.                          | No        | `20`    |
 
 ### Example
+
 ```plaintext
 /api/jikan/next-season?format=TV&page=1&perPage=20
 ```
@@ -605,8 +616,6 @@ Retrieves next seasonal anime.
 
 ```json
 {
-  "success": "boolean",
-  "status": "integer",
   "hasNextPage": "boolean",
   "total": "integer",
   "currentPage": "number",
@@ -652,9 +661,8 @@ Retrieves next seasonal anime.
     }
   ]
 }
-
-
 ```
+
 </details>
 
 ---
@@ -662,19 +670,23 @@ Retrieves next seasonal anime.
 ## 9. Characters <a id="9-characters"></a>
 
 ### Endpoint
+
 ```plaintext
 GET /api/jikan/characters/:malId
 ```
 
 ### Description
+
 Retrieves the characters of a specific anime.
 
 ### Path Parameters
-| Parameter | Type   | Description | Required?  | Default |
-|-----------|--------|-------------|-----------|----------| 
-| `malId` | number | The MAL ID of the anime. | Yes | `''` |
+
+| Parameter | Type   | Description              | Required? | Default |
+| --------- | ------ | ------------------------ | --------- | ------- |
+| `malId`   | number | The MAL ID of the anime. | Yes       | `''`    |
 
 ### Example
+
 ```plaintext
 /api/jikan/characters/56784
 ```
@@ -702,8 +714,8 @@ Retrieves the characters of a specific anime.
     }
   ]
 }
-
 ```
+
 </details>
 
 ---
@@ -711,21 +723,24 @@ Retrieves the characters of a specific anime.
 ## 10. MAL Episodes <a id="10-mal-episodes"></a>
 
 ### Endpoint
+
 ```plaintext
 GET /api/jikan/mal-episodes/:malId
 ```
 
 ### Description
+
 Retrieves MAL anime episodes.
 
 ### Query Parameters
-| Parameter | Type   | Description | Required?  | Default |
-|-----------|--------|-------------|-----------|----------| 
-| `malId` | number | The MAL ID of the anime. | Yes | `''` |
-| `page`    | number | The page number of results to return. | No | `1` |
 
+| Parameter | Type   | Description                           | Required? | Default |
+| --------- | ------ | ------------------------------------- | --------- | ------- |
+| `malId`   | number | The MAL ID of the anime.              | Yes       | `''`    |
+| `page`    | number | The page number of results to return. | No        | `1`     |
 
 ### Example
+
 ```plaintext
 /api/jikan/mal-episodes/:malId?page=1
 ```
@@ -735,8 +750,6 @@ Retrieves MAL anime episodes.
 
 ```json
 {
-  "success": "boolean",
-  "status": "integer",
   "hasNextPage": "boolean",
   "currentPage": "number",
   "lastPage": "integer",
@@ -750,8 +763,8 @@ Retrieves MAL anime episodes.
     }
   ]
 }
-
 ```
+
 </details>
 
 ---
@@ -759,20 +772,24 @@ Retrieves MAL anime episodes.
 ## 11. MAL EpisodeInfo <a id="11-mal-episode-info"></a>
 
 ### Endpoint
+
 ```plaintext
 GET /api/jikan/mal-episode-info/:malId/:episodeNumber
 ```
 
 ### Description
+
 Retrieves the related anime for a specific anime.
 
 ### Path Parameters
-| Parameter | Type   | Description | Required?  | Default |
-|-----------|--------|-------------|-----------|----------| 
-| `malId` | number | The MAL ID of the anime. | Yes | `''` |
-| `episodeNumber` | number |The episode number of the anime. | Yes | `''` |
+
+| Parameter       | Type   | Description                      | Required? | Default |
+| --------------- | ------ | -------------------------------- | --------- | ------- |
+| `malId`         | number | The MAL ID of the anime.         | Yes       | `''`    |
+| `episodeNumber` | number | The episode number of the anime. | Yes       | `''`    |
 
 ### Example
+
 ```plaintext
 /api/jikan/mal-episode-info/:malId/:episodeNumber
 ```
@@ -782,8 +799,6 @@ Retrieves the related anime for a specific anime.
 
 ```json
 {
-  "success": "boolean",
-  "status": "integer",
   "data": [
     {
       "number": "integer",
@@ -795,6 +810,7 @@ Retrieves the related anime for a specific anime.
   ]
 }
 ```
+
 </details>
 
 ---
@@ -802,37 +818,41 @@ Retrieves the related anime for a specific anime.
 ## 12. Season <a id="12-season"></a>
 
 ### Endpoint
+
 ```plaintext
 GET /api/jikan/seasons/:season/:year
 ```
 
 ### Description
+
 Retrieves the anime for a specific season and year.
 
 ### Path Parameters
-| Parameter | Type   | Description | Required?  | Default |
-|-----------|--------|-------------|-----------|----------| 
-| `season`  | string | The season (e.g., `spring`, `summer`, `fall`, `winter`). | Yes | `''` |
-| `year`    | number | The year. | Yes | `''` |
+
+| Parameter | Type   | Description                                              | Required? | Default |
+| --------- | ------ | -------------------------------------------------------- | --------- | ------- |
+| `season`  | string | The season (e.g., `spring`, `summer`, `fall`, `winter`). | Yes       | `''`    |
+| `year`    | number | The year.                                                | Yes       | `''`    |
 
 ### Query Parameters
-| Parameter | Type   | Description | Required?  | Default |
-|-----------|--------|-------------|-----------|----------| 
-| `format`  | string | Format of anime (TV, MOVIE, SPECIAL, OVA, ONA, MUSIC). | No | `TV` |
-| `page`    | number | The page number of results to return. | No | `1` |
-| `perPage` | number | The number of items per page. | No | `20` |
+
+| Parameter | Type   | Description                                            | Required? | Default |
+| --------- | ------ | ------------------------------------------------------ | --------- | ------- |
+| `format`  | string | Format of anime (TV, MOVIE, SPECIAL, OVA, ONA, MUSIC). | No        | `TV`    |
+| `page`    | number | The page number of results to return.                  | No        | `1`     |
+| `perPage` | number | The number of items per page.                          | No        | `20`    |
 
 ### Example
+
 ```plaintext
 /api/jikan/seasons/spring/2024?format=TV&page=1&perPage=20
 ```
+
 <details>
 <summary>📄 Response Schema</summary>
 
 ```json
 {
-  "success": "boolean",
-  "status": "integer",
   "hasNextPage": "boolean",
   "total": "integer",
   "lastPage": "integer",
@@ -878,8 +898,8 @@ Retrieves the anime for a specific season and year.
     }
   ]
 }
-
 ```
+
 </details>
 
 ---
@@ -887,24 +907,29 @@ Retrieves the anime for a specific season and year.
 ## 13. Anime Provider ID <a id="13-anime-provider-id"></a>
 
 ### Endpoint
+
 ```plaintext
 GET /api/jikan/get-provider/:malId
 ```
 
 ### Description
+
 Retrieves anime provider information using the MAL ID.
 
 ### Path Parameters
-| Parameter | Type   | Description | Required?  | Default |
-|-----------|--------|-------------|-----------|----------| 
-| `malId` | number | The MAL ID of the anime. | Yes | `''` |
+
+| Parameter | Type   | Description              | Required? | Default |
+| --------- | ------ | ------------------------ | --------- | ------- |
+| `malId`   | number | The MAL ID of the anime. | Yes       | `''`    |
 
 ### Query Parameters
-| Parameter | Type   | Description | Required?  | Default |
-|-----------|--------|-------------|-----------|----------| 
-| `provider` | string | The provider (e.g., `hianime`or`animekai`). | No | `hianime` |
+
+| Parameter  | Type   | Description                                 | Required? | Default   |
+| ---------- | ------ | ------------------------------------------- | --------- | --------- |
+| `provider` | string | The provider (e.g., `hianime`or`animekai`). | No        | `hianime` |
 
 ### Example
+
 ```plaintext
 /api/jikan/get-provider/56784?provider=hianime
 ```
@@ -914,56 +939,52 @@ Retrieves anime provider information using the MAL ID.
 
 ```json
 {
-    "data": {
-        "success": "Boolean",
-        "status": "Number",
-        "data": {
-            "malId": "Number",
-            "title": {
-                "romaji": "String",
-                "english": "String",
-                "native": "String"
-            },
-            "image": "String (URL)",
-            "bannerImage": "String (URL)",
-            "trailer": "String (URL)",
-            "episodes": "Number",
-            "startDate": "String",
-            "endDate": "String",
-            "format": "String",
-            "status": "String",
-            "genres": ["String", "String", "String"],
-            "duration": "String",
-            "score": "Number",
-            "synopsis": "String",
-            "season": "String",
-            "studio": [
-                {
-                    "mal_id": "Number",
-                    "type": "String",
-                    "name": "String",
-                    "url": "String (URL)"
-                }
-            ],
-            "producers": [
-                {
-                    "mal_id": "Number",
-                    "type": "String",
-                    "name": "String",
-                    "url": "String (URL)"
-                }
-            ]
-        },
-        "animeProvider": {
-            "animeId": "String",
-            "name": "String",
-            "romaji": "String",
-            "score": "Number"
-        }
-    }
+  "data": {
+    "malId": "Number",
+    "title": {
+      "romaji": "String",
+      "english": "String",
+      "native": "String"
+    },
+    "image": "String (URL)",
+    "bannerImage": "String (URL)",
+    "trailer": "String (URL)",
+    "episodes": "Number",
+    "startDate": "String",
+    "endDate": "String",
+    "format": "String",
+    "status": "String",
+    "genres": ["String", "String", "String"],
+    "duration": "String",
+    "score": "Number",
+    "synopsis": "String",
+    "season": "String",
+    "studio": [
+      {
+        "mal_id": "Number",
+        "type": "String",
+        "name": "String",
+        "url": "String (URL)"
+      }
+    ],
+    "producers": [
+      {
+        "mal_id": "Number",
+        "type": "String",
+        "name": "String",
+        "url": "String (URL)"
+      }
+    ]
+  },
+  "animeProvider": {
+    "animeId": "String",
+    "name": "String",
+    "romaji": "String",
+    "score": "Number"
+  }
 }
-
 ```
+
 </details>
 
 ---
@@ -971,24 +992,29 @@ Retrieves anime provider information using the MAL ID.
 ## 14. Anime Provider Episodes <a id="14-anime-provider-episodes"></a>
 
 ### Endpoint
+
 ```plaintext
 GET /api/jikan/provider-episodes/:malId
 ```
 
 ### Description
+
 Retrieves episodes for an anime using the MAL ID and animeprovider.
 
 ### Path Parameters
-| Parameter | Type   | Description | Required?  | Default |
-|-----------|--------|-------------|-----------|----------| 
-| `malId` | number | The MAL ID of the anime. | Yes | `''` |
+
+| Parameter | Type   | Description              | Required? | Default |
+| --------- | ------ | ------------------------ | --------- | ------- |
+| `malId`   | number | The MAL ID of the anime. | Yes       | `''`    |
 
 ### Query Parameters
-| Parameter | Type   | Description | Required?  | Default |
-|-----------|--------|-------------|-----------|----------| 
-| `provider` | string | The provider (e.g., `hianime`or`animekai`). | No | `hianime` |
+
+| Parameter  | Type   | Description                                 | Required? | Default   |
+| ---------- | ------ | ------------------------------------------- | --------- | --------- |
+| `provider` | string | The provider (e.g., `hianime`or`animekai`). | No        | `hianime` |
 
 ### Example
+
 ```plaintext
 /api/jikan/provider-episodes/56784?provider=hianime
 ```
@@ -998,66 +1024,61 @@ Retrieves episodes for an anime using the MAL ID and animeprovider.
 
 ```json
 {
-    "data": {
-        "success": "Boolean",
-        "status": "Number",
-        "data": {
-            "malId": "Number",
-            "title": {
-                "romaji": "String",
-                "english": "String",
-                "native": "String"
-            },
-            "image": "String (URL)",
-            "bannerImage": "String (URL)",
-            "trailer": "String (URL)",
-            "episodes": "Number",
-            "startDate": "String",
-            "endDate": "String",
-            "format": "String",
-            "status": "String",
-            "genres": ["String", "String", "String"],
-            "duration": "String",
-            "score": "Number",
-            "synopsis": "String",
-            "season": "String",
-            "studio": [
-                {
-                    "mal_id": "Number",
-                    "type": "String",
-                    "name": "String",
-                    "url": "String (URL)"
-                }
-            ],
-            "producers": [
-                {
-                    "mal_id": "Number",
-                    "type": "String",
-                    "name": "String",
-                    "url": "String (URL)"
-                }
-            ]
-        },
-    "providerEpisodes": [
-      {    
-          "episodeNumber": "Number",
-          "rating": "Number",
-          "aired": "Boolean",
-          "episodeId": "String",
-          "title": "String",
-          "overview": "String",
-          "thumbnail": "String (URL or null)"
-      },
-      // ... more episode objects with the same structure could vary though
+  "data": {
+    "malId": "Number",
+    "title": {
+      "romaji": "String",
+      "english": "String",
+      "native": "String"
+    },
+    "image": "String (URL)",
+    "bannerImage": "String (URL)",
+    "trailer": "String (URL)",
+    "episodes": "Number",
+    "startDate": "String",
+    "endDate": "String",
+    "format": "String",
+    "status": "String",
+    "genres": ["String", "String", "String"],
+    "duration": "String",
+    "score": "Number",
+    "synopsis": "String",
+    "season": "String",
+    "studio": [
+      {
+        "mal_id": "Number",
+        "type": "String",
+        "name": "String",
+        "url": "String (URL)"
+      }
+    ],
+    "producers": [
+      {
+        "mal_id": "Number",
+        "type": "String",
+        "name": "String",
+        "url": "String (URL)"
+      }
     ]
-  }
+  },
+  "providerEpisodes": [
+    {
+      "episodeNumber": "Number",
+      "rating": "Number",
+      "aired": "Boolean",
+      "episodeId": "String",
+      "title": "String",
+      "overview": "String",
+      "thumbnail": "String (URL or null)"
+    }
+    // ... more episode objects with the same structure could vary though
+  ]
 }
 ```
+
 </details>
 
 <p align="center">
   <strong><a href="./anilist.md">Previous (Anilist docs)</a></strong> &emsp;&emsp; | &emsp;&emsp;
   <strong><a href="./hianime.md">Next (Hianime docs)</a></strong>
 </p>
-
-
