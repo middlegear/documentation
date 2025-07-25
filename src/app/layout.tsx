@@ -38,6 +38,7 @@ export default async function RootLayout({
       <body>
         <Layout
           // banner={banner}
+          sidebar={{ autoCollapse: true }}
           navbar={navbar}
           pageMap={await getPageMap()}
           docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
