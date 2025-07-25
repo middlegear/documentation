@@ -1,0 +1,440 @@
+# TVMaze
+
+This document provides a comprehensive guide to the unofficial TVMaze provider API, detailing the available routes, their usage, and response schemas.
+
+---
+
+### 1. Search
+
+#### Endpoint
+
+```plaintext
+GET /api/tvmaze/search
+```
+
+#### Description
+
+This endpoint allows you to search for TV shows based on a query.
+
+#### Query Parameters
+
+| Parameter | Type   | Description                    | Required? | Default |
+| --------- | ------ | ------------------------------ | --------- | ------- |
+| `q`       | string | The search query for TV shows. | Yes       | `''`    |
+
+#### Example
+
+```plaintext
+/api/tvmaze/search?q=breaking bad
+```
+
+<details>
+<summary>📄 Response Schema</summary>
+
+```json
+{
+  "data": [
+    {
+      "tvMazeId": "number",
+      "url": "string",
+      "name": "string",
+      "type": "string",
+      "language": "string",
+      "status": "string",
+      "genres": ["string"],
+      "startDate": "string (ISO date)",
+      "endDate": "string (ISO date) or null",
+      "officialSite": "string or null",
+      "airSchedule": {
+        "time": "string",
+        "days": ["string"]
+      },
+      "rating": "number or null",
+      "image": {
+        "medium": "string (URL)",
+        "original": "string (URL)"
+      },
+      "network": {
+        "id": "number",
+        "name": "string",
+        "country": {
+          "name": "string",
+          "code": "string",
+          "timezone": "string"
+        },
+        "officialSite": "string or null"
+      } or null,
+      "summary": "string (HTML)",
+      "previousEpisode": {
+        "href": "string (URL)",
+        "name": "string"
+      },
+      "searchScore": "number",
+      "weight": "number",
+      "external": {
+        "tvrage": "number or null",
+        "thetvdb": "number or null",
+        "imdb": "string or null"
+      }
+    }
+  ]
+}
+
+```
+
+</details>
+
+---
+
+### 2. Show Info
+
+#### Endpoint
+
+```plaintext
+GET /api/tvmaze/info/:tvmazeId
+```
+
+#### Description
+
+Retrieves detailed information about a specific TV show, including episodes and cast.
+
+#### Path Parameters
+
+| Parameter  | Type   | Description                   | Required? | Default |
+| ---------- | ------ | ----------------------------- | --------- | ------- |
+| `tvmazeId` | number | The TVMaze ID of the TV show. | Yes       | `''`    |
+
+#### Example
+
+```plaintext
+/api/tvmaze/info/82
+```
+
+<details>
+<summary>📄 Response Schema</summary>
+
+```json
+{
+  "data": {
+    "tvMazeId": "number",
+    "url": "string (URL)",
+    "name": "string",
+    "type": "string",
+    "language": "string",
+    "status": "string",
+    "genres": ["string"],
+    "startDate": "string (YYYY-MM-DD)",
+    "endDate": "string (YYYY-MM-DD) or null",
+    "officialSite": "string (URL) or null",
+    "airSchedule": {
+      "time": "string (e.g., '21:00')",
+      "days": ["string (e.g., 'Sunday')"]
+    },
+    "rating": "number",
+    "image": {
+      "medium": "string (URL)",
+      "original": "string (URL)"
+    },
+    "network": {
+      "id": "number",
+      "name": "string",
+      "country": {
+        "name": "string",
+        "code": "string (e.g., 'US')",
+        "timezone": "string (e.g., 'America/New_York')"
+      },
+      "officialSite": "string (URL) or null"
+    },
+    "summary": "string (HTML)",
+    "previousEpisode": {
+      "href": "string (URL)",
+      "name": "string"
+    },
+    "searchScore": "number or null",
+    "weight": "number",
+    "external": {
+      "tvrage": "number or null",
+      "thetvdb": "number or null",
+      "imdb": "string or null"
+    }
+  },
+  "episodes": [
+    {
+      "tvMazeEpisodeId": "number",
+      "url": "string (URL)",
+      "title": "string",
+      "season": "number",
+      "episodeNumber": "number",
+      "type": "string (e.g., 'regular')",
+      "rating": "number",
+      "runtime": "number (minutes)",
+      "airdate": "string (YYYY-MM-DD)",
+      "airstamp": "string (ISO timestamp)",
+      "image": {
+        "medium": "string (URL)",
+        "original": "string (URL)"
+      },
+      "summary": "string (HTML)"
+    }
+  ]
+}
+```
+
+</details>
+
+---
+
+### 3. Episodes
+
+#### Endpoint
+
+```plaintext
+GET /api/tvmaze/episodes/:tvmazeId
+```
+
+#### Description
+
+Retrieves episodes for a specific TV show.
+
+#### Path Parameters
+
+| Parameter  | Type   | Description                   | Required? | Default |
+| ---------- | ------ | ----------------------------- | --------- | ------- |
+| `tvmazeId` | number | The TVMaze ID of the TV show. | Yes       | `''`    |
+
+#### Example
+
+```plaintext
+/api/tvmaze/episodes/82
+```
+
+<details>
+<summary>📄 Response Schema</summary>
+
+```json
+{
+  "data": [
+    {
+      "tvMazeEpisodeId": "number",
+      "url": "string (URL)",
+      "title": "string",
+      "season": "number",
+      "episodeNumber": "number",
+      "type": "string (e.g., 'regular')",
+      "rating": "number",
+      "runtime": "number (minutes)",
+      "airdate": "string (YYYY-MM-DD)",
+      "airstamp": "string (ISO 8601 timestamp)",
+      "image": {
+        "medium": "string (URL)",
+        "original": "string (URL)"
+      },
+      "summary": "string (HTML)"
+    }
+  ]
+}
+```
+
+</details>
+
+---
+
+### 4. Lookup by IMDb ID
+
+#### Endpoint
+
+```plaintext
+GET /api/tvmaze/lookup-imdb
+```
+
+#### Description
+
+Retrieves TV show information using an IMDb ID.
+
+#### Query Parameters
+
+| Parameter | Type   | Description              | Required? | Default |
+| --------- | ------ | ------------------------ | --------- | ------- |
+| `imdbId`  | string | The IMDb ID of the show. | Yes       | `''`    |
+
+#### Example
+
+```plaintext
+/api/tvmaze/lookup-imdb?imdbId=tt0903747
+```
+
+<details>
+<summary>📄 Response Schema</summary>
+
+```json
+{
+  "data": {
+    "tvMazeId": "number",
+    "url": "string (URL)",
+    "name": "string",
+    "type": "string (e.g., 'Scripted')",
+    "language": "string",
+    "status": "string (e.g., 'Ended', 'Running')",
+    "genres": ["string"],
+    "startDate": "string (YYYY-MM-DD)",
+    "endDate": "string (YYYY-MM-DD) or null",
+    "officialSite": "string (URL) or null",
+    "airSchedule": {
+      "time": "string (HH:mm format)",
+      "days": ["string (e.g., 'Sunday')"]
+    },
+    "rating": "number (e.g., 9.2)",
+    "image": {
+      "medium": "string (URL)",
+      "original": "string (URL)"
+    },
+    "network": {
+      "id": "number",
+      "name": "string",
+      "country": {
+        "name": "string",
+        "code": "string (ISO country code)",
+        "timezone": "string (IANA timezone format)"
+      },
+      "officialSite": "string (URL) or null"
+    },
+    "summary": "string (HTML)",
+    "previousEpisode": {
+      "href": "string (URL)",
+      "name": "string"
+    },
+    "searchScore": "number or null",
+    "weight": "number",
+    "external": {
+      "tvrage": "number or null",
+      "thetvdb": "number or null",
+      "imdb": "string or null"
+    }
+  }
+}
+```
+
+</details>
+
+---
+
+### 5. Lookup by TVDB ID
+
+#### Endpoint
+
+```plaintext
+GET /api/tvmaze/lookup-tvdb
+```
+
+#### Description
+
+Retrieves TV show information using a TVDB ID.
+
+#### Query Parameters
+
+| Parameter | Type   | Description              | Required? | Default |
+| --------- | ------ | ------------------------ | --------- | ------- |
+| `tvdbId`  | number | The TVDB ID of the show. | Yes       | `''`    |
+
+#### Example
+
+```plaintext
+/api/tvmaze/lookup-tvdb?tvdbId=81189
+```
+
+<details>
+<summary>📄 Response Schema</summary>
+
+```json
+{
+  "data": {
+    "tvMazeId": "number",
+    "url": "string (URL)",
+    "name": "string",
+    "type": "string (e.g., 'Scripted')",
+    "language": "string",
+    "status": "string (e.g., 'Ended', 'Running')",
+    "genres": ["string"],
+    "startDate": "string (YYYY-MM-DD)",
+    "endDate": "string (YYYY-MM-DD) or null",
+    "officialSite": "string (URL) or null",
+    "airSchedule": {
+      "time": "string (HH:mm format)",
+      "days": ["string (e.g., 'Sunday')"]
+    },
+    "rating": "number (e.g., 9.2)",
+    "image": {
+      "medium": "string (URL)",
+      "original": "string (URL)"
+    },
+    "network": {
+      "id": "number",
+      "name": "string",
+      "country": {
+        "name": "string",
+        "code": "string (ISO country code)",
+        "timezone": "string (IANA timezone format)"
+      },
+      "officialSite": "string (URL) or null"
+    },
+    "summary": "string (HTML)",
+    "previousEpisode": {
+      "href": "string (URL)",
+      "name": "string"
+    },
+    "searchScore": "number or null",
+    "weight": "number",
+    "external": {
+      "tvrage": "number or null",
+      "thetvdb": "number or null",
+      "imdb": "string or null"
+    }
+  }
+}
+```
+
+</details>
+
+---
+
+### 6. External Databases
+
+#### Endpoint
+
+```plaintext
+GET /api/tvmaze/external-databases/:tvmazeId
+```
+
+#### Description
+
+Retrieves external database IDs for a specific TV show.
+
+#### Path Parameters
+
+| Parameter  | Type   | Description                   | Required? | Default |
+| ---------- | ------ | ----------------------------- | --------- | ------- |
+| `tvmazeId` | number | The TVMaze ID of the TV show. | Yes       | `''`    |
+
+#### Example
+
+```plaintext
+/api/tvmaze/external-databases/82
+```
+
+<details>
+<summary>📄 Response Schema</summary>
+
+```json
+{
+  "data": {
+    "tmdb": "number",
+    "tvMazeId": "number",
+    "name": "string",
+    "tvRageId": "number",
+    "theTvDb": "number",
+    "imdb": "string (IMDB ID format)"
+  }
+}
+```
+
+</details>

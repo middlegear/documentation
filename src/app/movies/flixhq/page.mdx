@@ -1,0 +1,215 @@
+# FlixHQ
+
+This document provides a comprehensive guide to the unofficial FlixHQ provider API, detailing the available routes, their usage, and response schemas.
+
+---
+
+### 1. Search
+
+#### Endpoint
+
+```plaintext
+GET /api/flixhq/search
+```
+
+#### Description
+
+This endpoint allows you to search for media based on a query.
+
+#### Query Parameters
+
+| Parameter | Type   | Description                           | Required? | Default |
+| --------- | ------ | ------------------------------------- | --------- | ------- |
+| `q`       | string | The search query for media.           | Yes       | `''`    |
+| `page`    | number | The page number of results to return. | No        | `1`     |
+
+#### Example
+
+```plaintext
+/api/flixhq/search?q=the matrix&page=1
+```
+
+<details>
+<summary>📄 Response Schema</summary>
+
+```json
+{
+  "currentPage": "number",
+  "hasNextPage": "boolean",
+  "data": [
+    {
+      "id": "string",
+      "title": "string",
+      "quality": "string",
+      "url": "string",
+      "releaseDate": "string or null",
+      "seasons": "number or null",
+      "image": "string",
+      "type": "string"
+    }
+  ]
+}
+```
+
+</details>
+
+---
+
+### 2. Media Info
+
+#### Endpoint
+
+```plaintext
+GET /api/flixhq/info/:mediaId
+```
+
+#### Description
+
+Retrieves detailed information about a specific media item, including episodes.
+
+#### Path Parameters
+
+| Parameter | Type   | Description                 | Required? | Default |
+| --------- | ------ | --------------------------- | --------- | ------- |
+| `mediaId` | string | The FlixHQ ID of the media. | Yes       | `''`    |
+
+#### Example
+
+```plaintext
+/api/flixhq/info/movie-the-matrix-19724
+```
+
+<details>
+<summary>📄 Response Schema</summary>
+
+```json
+{
+  "data": {
+    "id": "string",
+    "cover": "string",
+    "title": "string",
+    "image": "string",
+    "description": "string",
+    "type": "string",
+    "releaseDate": "string",
+    "genres": ["string"],
+    "casts": ["string"],
+    "tags": ["string"],
+    "production": "string",
+    "country": "string",
+    "duration": "string",
+    "rating": "number"
+  },
+  "episodes": [
+    {
+      "episodeId": "string",
+      "title": "string"
+    }
+  ]
+}
+```
+
+</details>
+
+---
+
+### 3. Servers
+
+#### Endpoint
+
+```plaintext
+GET /api/flixhq/servers/:episodeId
+```
+
+#### Description
+
+Retrieves available servers for a specific episode.
+
+#### Path Parameters
+
+| Parameter   | Type   | Description                   | Required? | Default |
+| ----------- | ------ | ----------------------------- | --------- | ------- |
+| `episodeId` | string | The FlixHQ ID of the episode. | Yes       | `''`    |
+
+#### Example
+
+```plaintext
+/api/flixhq/servers/movie-19724
+```
+
+<details>
+<summary>📄 Response Schema</summary>
+
+```json
+{
+  "data": [
+    {
+      "name": "string",
+      "id": "number"
+    }
+  ]
+}
+```
+
+</details>
+
+---
+
+### 4. Watch
+
+#### Endpoint
+
+```plaintext
+GET /api/flixhq/watch/:episodeId
+```
+
+#### Description
+
+Retrieves streaming sources for a specific episode.
+
+#### Path Parameters
+
+| Parameter   | Type   | Description                   | Required? | Default |
+| ----------- | ------ | ----------------------------- | --------- | ------- |
+| `episodeId` | string | The FlixHQ ID of the episode. | Yes       | `''`    |
+
+#### Query Parameters
+
+| Parameter | Type   | Description                                                             | Required? | Default    |
+| --------- | ------ | ----------------------------------------------------------------------- | --------- | ---------- |
+| `server`  | string | The server to use for streaming,(`vidcloud` or `akcloud` or `upcloud`). | No        | `vidcloud` |
+
+#### Example
+
+```plaintext
+/api/flixhq/watch/episode-67890?server=vidcloud
+```
+
+<details>
+<summary>📄 Response Schema</summary>
+
+```json
+{
+  "headers": {
+    "Referer": "string"
+  },
+  "data": {
+    "subtitles": [
+      {
+        "url": "string",
+        "lang": "string",
+        "default": "boolean"
+      }
+    ],
+    "sources": [
+      {
+        "url": "string",
+        "isM3U8": "boolean",
+        "type": "string"
+      }
+    ]
+  }
+}
+```
+
+</details>
